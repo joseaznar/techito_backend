@@ -15,11 +15,6 @@ export class QuestionOption {
     @Column()
     content: string;
 
-    @ApiProperty({
-        description: "The question.",
-        required: true,
-        type: Question,
-    })
     @ManyToOne(() => Question, question => question.options)
     question: Question;
 }
