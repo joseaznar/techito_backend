@@ -62,7 +62,7 @@ export class QuestionsController {
     summary: 'Create a new question option',
     description: 'Creates a new question option in the database.',
   })
-  @Post()
+  @Post('option')
   async createOption(@Body() body: CreateOptionDto) {
     return this.optionsService.create(body);
   }
@@ -71,7 +71,7 @@ export class QuestionsController {
     summary: 'Update a question option',
     description: 'Updates the specified question option fields in the database.',
   })
-  @Patch(':id')
+  @Patch('option/:id')
   async updateOption(
     @Param('id') id: string,
     @Body() body: UpdateOptionDto,
@@ -83,7 +83,7 @@ export class QuestionsController {
     summary: 'Get a question option',
     description: 'Get the speciffied question option.',
   })
-  @Get(':id')
+  @Get('option/:id')
   async getOption(
     @Param('id') id: string,
   ) {
