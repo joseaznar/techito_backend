@@ -28,6 +28,7 @@ export class QuestionsService {
     const question = new Question();
     question.content = createQuestionDto.content;
     question.type = createQuestionDto.type;
+    question.options = createQuestionDto.options;
 
     return this.repository.save(question);
   }

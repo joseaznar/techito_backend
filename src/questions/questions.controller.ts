@@ -57,7 +57,7 @@ export class QuestionsController {
   ) {
     return this.service.findOne(id);
   }
-
+/* 
   @ApiOperation({
     summary: 'Create a new question option',
     description: 'Creates a new question option in the database.',
@@ -88,5 +88,5 @@ export class QuestionsController {
     @Param('id') id: string,
   ) {
     return this.optionsService.findOne(id);
-  }
+  } */
 }
