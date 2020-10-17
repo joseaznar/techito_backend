@@ -15,15 +15,4 @@ export class UpdateQuestionDto {
         required: false,
     })
     type?: QuestionType;
-
-    @ApiProperty({
-        description: `The options to answer this questions.`,
-        example: [
-            '0-500',
-            '500-1000',
-            '1000+',
-        ],
-        required: false,
-    })
-    options?: string[];
 }

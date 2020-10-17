@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { QuestionOption } from './questions/question-option.entity';
 import { Question } from './questions/question.entity';
 import { QuestionsModule } from './questions/questions.module';
 
@@ -17,7 +18,7 @@ import { QuestionsModule } from './questions/questions.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Question],
+      entities: [Question, QuestionOption],
       synchronize: true,
     }),
     QuestionsModule
