@@ -6,6 +6,9 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const origin = '*';
+  app.enableCors({ origin });
+
   const options = new DocumentBuilder()
     .setTitle('TECHito API')
     .setDescription('The TECHito API documentation for the Hackathon BBVA 2020')

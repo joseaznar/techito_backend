@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger/dist/decorators/api-operation.decorator';
 import { ApiTags } from '@nestjs/swagger/dist/decorators/api-use-tags.decorator';
 import { CreateOptionDto } from './create-option.dto';
@@ -56,6 +56,17 @@ export class QuestionsController {
     @Param('id') id: string,
   ) {
     return this.service.findOne(id);
+  }
+
+  @ApiOperation({
+    summary: 'Delete a question',
+    description: 'Delete the speciffied question.',
+  })
+  @Delete(':id')
+  async delete(
+    @Param('id') id: string,
+  ) {
+    return this.service.remove(id);
   }
 /* 
   @ApiOperation({
