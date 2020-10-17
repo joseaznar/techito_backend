@@ -9,7 +9,7 @@ export class QuestionOption {
 
     @ApiProperty({
         description: "The question option content.",
-        example: 'What is your name?',
+        example: '0 to 500',
         required: true,
     })
     @Column()
