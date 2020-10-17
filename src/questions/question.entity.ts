@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { QuestionOption } from './question-option.entity';
 
 export enum QuestionType {
     MultipleChoice = 'MultipleChoice',
@@ -36,6 +37,6 @@ export class Question {
         ],
         required: false,
     })
-    @Column()
-    options?: string[];
+    @OneToMany(type => QuestionOption, questionsOption => questionsOption.question)
+    options?: QuestionOption[];
 }
