@@ -5,8 +5,7 @@ import { Connection } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Question } from './questions/question.entity';
-import { QuestionsController } from './questions/questions.controller';
-import { QuestionsService } from './questions/questions.service';
+import { QuestionsModule } from './questions/questions.module';
 
 @Module({
   imports: [
@@ -21,9 +20,10 @@ import { QuestionsService } from './questions/questions.service';
       entities: [Question],
       synchronize: true,
     }),
+    QuestionsModule
   ],
-  controllers: [AppController, QuestionsController],
-  providers: [AppService, QuestionsService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {
   constructor(private connection: Connection) {}
