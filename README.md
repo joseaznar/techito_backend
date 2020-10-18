@@ -1,7 +1,7 @@
 
 ## Description
 
-Se pueden descarrgar el app de ios (.app dentro del .zip) y android (.apk) en el siguiente link: https://we.tl/t-pc6OU94U7A
+Se pueden descarrgar el app de ios (.app dentro del .zip) y android (.apk) en el siguiente link: https://we.tl/t-TuJW22NrNM
 
 Se puede consultar la página web en el siguiente link: http://techito-frontend.s3-website.us-east-2.amazonaws.com/
 
