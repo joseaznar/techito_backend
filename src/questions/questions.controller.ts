@@ -72,7 +72,7 @@ export class QuestionsController {
     summary: 'Find all answers',
     description: 'Retrieves list of answers.',
   })
-  @Get()
+  @Get('answer')
   async findAllAnswers() {
     return this.answerService.findAll();
   }
