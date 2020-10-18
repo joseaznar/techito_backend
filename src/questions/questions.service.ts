@@ -12,8 +12,8 @@ export class QuestionsService {
     private repository: Repository<Question>,
   ) {}
 
-  findAll(): Promise<Question[]> {
-    return this.repository.find();
+  async findAll(): Promise<Question[]> {
+    return await this.repository.find();
   }
 
   findOne(id: string): Promise<Question> {
