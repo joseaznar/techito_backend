@@ -21,7 +21,7 @@ export class QuestionAnswer {
         type: Question,
         required: true,
     })
-    @ManyToOne(() => Question, question => question.answers)
+    @ManyToOne(() => Question, question => question.answers, {eager: true})
     question: Question;
 
     @ManyToOne(() => Answer, answer => answer.answers)
