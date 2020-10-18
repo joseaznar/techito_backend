@@ -1,6 +1,8 @@
 
 ## Description
 
+Se pueden descarrgar el app de ios (.app dentro del .zip) y android (.apk) en el siguiente link: https://we.tl/t-pc6OU94U7A
+
 En este repositorio se encuentra el código del backend de TECHito.
 
 Código del sitio web de TECHito: https://github.com/joseaznar/techito_frontend
