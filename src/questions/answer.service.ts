@@ -58,9 +58,9 @@ export class AnswerService {
         if (personas === '0') {
           personas = '1';
         }
-      } else if (ans.question.content.includes('avion')) {
+      } else if (ans.question.content.includes('avión')) {
         avion = ans.content;
-      } else if (ans.question.content.includes('coche')) {
+      } else if (ans.question.content.includes('carro')) {
         coche = ans.content;
       } else if (ans.question.content.includes('alimentacion')) {
         alimentacion = ans.content;
