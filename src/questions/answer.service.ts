@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm/dist/common/typeorm.decorators
 import { Repository } from 'typeorm';
 import { Answer } from './answers.entity';
 import { CreateAnswerDto } from './create-answer.dto';
+import { Question } from './question.entity';
 import { UpdateAnswerDto } from './update-answer.dto';
 
 @Injectable()
@@ -10,6 +11,7 @@ export class AnswerService {
   constructor(
     @InjectRepository(Answer)
     private repository: Repository<Answer>,
+    private questionRepository: Repository<Question>,
     private httpService: HttpService,
   ) {}
 
@@ -33,6 +35,9 @@ export class AnswerService {
     answer.phone = createAnswerDto.phone;
 
     let savedAnswer = await this.repository.save(answer);
+
+    // to retreive the complete questions object
+    savedAnswer = await this.findOne(`${savedAnswer.id}`);
 
     let luz = '0',
       gas = '0',
