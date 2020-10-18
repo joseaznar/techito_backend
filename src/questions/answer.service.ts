@@ -48,21 +48,21 @@ export class AnswerService {
       console.log('--------------');
       console.log(ans);
       console.log('--------------');
-      if (ans.content.includes('luz')) {
+      if (ans.question.content.includes('luz')) {
         luz = ans.content;
-      } else if (ans.content.includes('gas')) {
+      } else if (ans.question.content.includes('gas')) {
         gas = ans.content;
-      } else if (ans.content.includes('personas')) {
+      } else if (ans.question.content.includes('personas')) {
         personas = ans.content;
 
         if (personas === '0') {
           personas = '1';
         }
-      } else if (ans.content.includes('avion')) {
+      } else if (ans.question.content.includes('avion')) {
         avion = ans.content;
-      } else if (ans.content.includes('coche')) {
+      } else if (ans.question.content.includes('coche')) {
         coche = ans.content;
-      } else if (ans.content.includes('alimentacion')) {
+      } else if (ans.question.content.includes('alimentacion')) {
         alimentacion = ans.content;
 
         if (alimentacion.includes('diario')) {
