@@ -16,6 +16,11 @@ export class QuestionAnswer {
     @Column()
     content: string;
 
+    @ApiProperty({
+        description: "The question this answer refers to.",
+        type: Question,
+        required: true,
+    })
     @ManyToOne(() => Question, question => question.answers)
     question: Question;
 
