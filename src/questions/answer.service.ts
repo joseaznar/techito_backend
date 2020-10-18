@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm/dist/common/typeorm.decorators
 import { Repository } from 'typeorm';
 import { Answer } from './answers.entity';
 import { CreateAnswerDto } from './create-answer.dto';
-import { Question } from './question.entity';
 import { UpdateAnswerDto } from './update-answer.dto';
 
 @Injectable()
@@ -11,7 +10,6 @@ export class AnswerService {
   constructor(
     @InjectRepository(Answer)
     private repository: Repository<Answer>,
-    private questionRepository: Repository<Question>,
     private httpService: HttpService,
   ) {}
 
