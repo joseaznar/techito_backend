@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger/dist/decorators/api-operation.decorator';
 import { ApiTags } from '@nestjs/swagger/dist/decorators/api-use-tags.decorator';
-import { CreateOptionDto } from './create-option.dto';
+import { AnswerService } from './answer.service';
+import { CreateAnswerDto } from './create-answer.dto';
 import { CreateQuestionDto } from './create-question.dto';
-import { QuestionsOptionService } from './question-option.service';
 import { QuestionsService } from './questions.service';
-import { UpdateOptionDto } from './update-option.dto';
+import { UpdateAnswerDto } from './update-answer.dto';
 import { UpdateQuestionDto } from './update-question.dto';
 
 @ApiTags('Questions')
@@ -13,14 +13,13 @@ import { UpdateQuestionDto } from './update-question.dto';
 export class QuestionsController {
   constructor(
     private readonly service: QuestionsService,
-    private readonly optionsService: QuestionsOptionService,
+    private readonly answerService: AnswerService,
     ) {}
 
   @ApiOperation({
     summary: 'Find all questions',
     description: 'Retrieves list of questions.',
   })
-  // #endregion
   @Get()
   async findAll() {
     return this.service.findAll();
@@ -68,36 +67,45 @@ export class QuestionsController {
   ) {
     return this.service.remove(id);
   }
-/* 
+
   @ApiOperation({
-    summary: 'Create a new question option',
-    description: 'Creates a new question option in the database.',
+    summary: 'Find all answers',
+    description: 'Retrieves list of answers.',
   })
-  @Post('option')
-  async createOption(@Body() body: CreateOptionDto) {
-    return this.optionsService.create(body);
+  @Get()
+  async findAllAnswers() {
+    return this.answerService.findAll();
   }
 
   @ApiOperation({
-    summary: 'Update a question option',
-    description: 'Updates the specified question option fields in the database.',
+    summary: 'Create a new answer',
+    description: 'Creates a new answer in the database.',
   })
-  @Patch('option/:id')
-  async updateOption(
-    @Param('id') id: string,
-    @Body() body: UpdateOptionDto,
-  ) {
-    return this.optionsService.update(id, body);
+  @Post('answer')
+  async createAnswer(@Body() body: CreateAnswerDto) {
+    return this.answerService.create(body);
   }
 
   @ApiOperation({
-    summary: 'Get a question option',
-    description: 'Get the speciffied question option.',
+    summary: 'Update an answer',
+    description: 'Updates the specified answer option fields in the database.',
   })
-  @Get('option/:id')
-  async getOption(
+  @Patch('answer/:id')
+  async updateAnswer(
+    @Param('id') id: string,
+    @Body() body: UpdateAnswerDto,
+  ) {
+    return this.answerService.update(id, body);
+  }
+
+  @ApiOperation({
+    summary: 'Get an answer',
+    description: 'Get the speciffied answer.',
+  })
+  @Get('answer/:id')
+  async getAnswer(
     @Param('id') id: string,
   ) {
-    return this.optionsService.findOne(id);
-  } */
+    return this.answerService.findOne(id);
+  }
 }

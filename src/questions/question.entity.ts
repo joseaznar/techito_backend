@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { QuestionAnswer } from './question-answer.entity';
 import { QuestionOption } from './question-option.entity';
 
 export enum QuestionType {
@@ -39,4 +40,11 @@ export class Question {
     { cascade: true, eager: true, nullable: true },
   )
   options?: QuestionOption[];
+
+  @OneToMany(
+    type => QuestionAnswer,
+    questionAnswer => questionAnswer.question,
+    { cascade: true, nullable: true },
+  )
+  answers?: QuestionAnswer[];
 }
