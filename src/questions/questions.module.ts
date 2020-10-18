@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { HttpModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnswerService } from './answer.service';
 import { Answer } from './answers.entity';
@@ -10,7 +10,7 @@ import { QuestionsController } from './questions.controller';
 import { QuestionsService } from './questions.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Question, QuestionOption, QuestionAnswer, Answer])],
+  imports: [HttpModule, TypeOrmModule.forFeature([Question, QuestionOption, QuestionAnswer, Answer])],
   providers: [QuestionsService, QuestionsOptionService, AnswerService],
   controllers: [QuestionsController],
   exports: [TypeOrmModule]

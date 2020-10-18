@@ -8,7 +8,7 @@ export class UpdateAnswerDto {
         required: false,
         isArray: true,
       })
-      answers: QuestionAnswer[];
+      answers?: QuestionAnswer[];
     
       @ApiProperty({
         description: 'The user s email.',

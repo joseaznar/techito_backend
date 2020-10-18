@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpService, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm/dist/common/typeorm.decorators';
 import { Repository } from 'typeorm';
 import { Answer } from './answers.entity';
@@ -10,6 +10,7 @@ export class AnswerService {
   constructor(
     @InjectRepository(Answer)
     private repository: Repository<Answer>,
+    private httpService: HttpService,
   ) {}
 
   async findAll(): Promise<Answer[]> {
@@ -24,24 +25,78 @@ export class AnswerService {
     await this.repository.delete(id);
   }
 
-  create(createAnswerDto: CreateAnswerDto): Promise<Answer> {
+  async create(createAnswerDto: CreateAnswerDto): Promise<Answer> {
     const answer = new Answer();
     answer.answers = createAnswerDto.answers;
     answer.carbonFootprint = createAnswerDto.carbonFootprint;
     answer.email = createAnswerDto.email;
     answer.phone = createAnswerDto.phone;
 
-    return this.repository.save(answer);
+    let savedAnswer = await this.repository.save(answer);
+
+    let luz = '0',
+      gas = '0',
+      personas = '1',
+      avion = '0',
+      coche = '0',
+      alimentacion = 'Mix';
+    savedAnswer.answers.forEach(ans => {
+      if (ans.question.content.includes('luz')) {
+        luz = ans.question.content;
+      } else if (ans.question.content.includes('gas')) {
+        gas = ans.question.content;
+      } else if (ans.question.content.includes('personas')) {
+        personas = ans.question.content;
+
+        if (personas === '0') {
+          personas = '1';
+        }
+      } else if (ans.question.content.includes('avion')) {
+        avion = ans.question.content;
+      } else if (ans.question.content.includes('coche')) {
+        coche = ans.question.content;
+      } else if (ans.question.content.includes('alimentacion')) {
+        alimentacion = ans.question.content;
+
+        if (alimentacion.includes('diario')) {
+          alimentacion = 'Carne';
+        } else if (alimentacion.includes('regularmente')) {
+          alimentacion = 'Mix';
+        } else if (alimentacion.includes('Vegetariano')) {
+          alimentacion = 'Vegetariano';
+        } else {
+          alimentacion = 'Vegano';
+        }
+      }
+    });
+
+    const lambdaUrl = `https://htd5wfpajd.execute-api.us-east-2.amazonaws.com/dev/get-co2?luz=${luz}&gas=${gas}&personas=${personas}&avion=${avion}&coche=${coche}&alimentacion=${alimentacion}`;
+
+    console.log('******************');
+    console.log(lambdaUrl);
+
+    const response = await this.httpService.get(lambdaUrl).toPromise();
+
+    console.log(response.data);
+    console.log('******************');
+
+    await this.update(`${savedAnswer.id}`, {
+      carbonFootprint: response.data.co2_kg_anual,
+    });
+
+    savedAnswer = await this.findOne(`${savedAnswer.id}`);
+
+    console.log('++++++++++++++++++');
+    console.log(savedAnswer);
+    console.log('++++++++++++++++++');
+    
+
+    return savedAnswer;
   }
 
-  async update(
-    id: string,
-    updateAnswerDto: UpdateAnswerDto,
-  ): Promise<Answer> {
-    const answer = await this.findOne(id);
+  async update(id: string, updateAnswerDto: UpdateAnswerDto): Promise<number> {
+    const ans = await this.repository.update(id, updateAnswerDto);
 
-    await this.repository.update(id, updateAnswerDto);
-
-    return answer
+    return ans.affected;
   }
 }
