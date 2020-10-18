@@ -40,7 +40,11 @@ export class AnswerService {
       avion = '0',
       coche = '0',
       alimentacion = 'Mix';
+
     savedAnswer.answers.forEach(ans => {
+      console.log('--------------');
+      console.log(ans);
+      console.log('--------------');
       if (ans.question.content.includes('luz')) {
         luz = ans.question.content;
       } else if (ans.question.content.includes('gas')) {
@@ -89,7 +93,6 @@ export class AnswerService {
     console.log('++++++++++++++++++');
     console.log(savedAnswer);
     console.log('++++++++++++++++++');
-    
 
     return savedAnswer;
   }
